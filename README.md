@@ -95,8 +95,8 @@ Lateral-entry B.Tech CSE student at Shiv Nadar University (batch of 2027), focus
 
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=Deltasthicc&show_icons=true&hide_border=true&theme=transparent&title_color=a58be0&text_color=9b8bb8&icon_color=f19cbc" alt="GitHub stats"/>
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Deltasthicc&layout=compact&hide_border=true&theme=transparent&title_color=a58be0&text_color=9b8bb8" alt="Top languages"/>
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=Deltasthicc&show_icons=true&hide_border=true&hide_rank=true&theme=transparent&title_color=a58be0&text_color=9b8bb8&icon_color=f19cbc" alt="GitHub stats"/>
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Deltasthicc&layout=compact&hide=html&hide_border=true&theme=transparent&title_color=a58be0&text_color=9b8bb8" alt="Top languages"/>
 <img height="165" src="https://streak-stats.demolab.com/?user=Deltasthicc&theme=transparent&hide_border=true&ring=a58be0&fire=f19cbc&currStreakLabel=a58be0&currStreakNum=9b8bb8&sideLabels=9b8bb8&sideNums=9b8bb8&dates=9b8bb8" alt="Streak"/>
 
 </div>
