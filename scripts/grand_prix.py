@@ -90,8 +90,62 @@ def resample(poly, n):
     return out, total
 
 
+
+CAR_IMG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "car", "car-xs.webp")
+
+
+def real_car(P, N, dur, d_path, width=60, step=2):
+    """The real (side-on) F1 car driving the circuit.
+
+    A top-down track needs a side-on photo to behave: two copies (nose left / nose right, the second is
+    a mirror) swap at the track's left/right turning points, and each pitches with the slope of the track.
+    """
+    if not os.path.exists(CAR_IMG):
+        return None
+    import base64
+    with open(CAR_IMG, "rb") as f:
+        uri = "data:image/webp;base64," + base64.b64encode(f.read()).decode()
+    h = width * 67 / 220                      # car-xs.webp is 220x67
+    M = N // step
+    facing, pitch = [], []
+    cur = -1                                  # -1: nose left (the photo's native direction)
+    for k in range(M + 1):
+        i = (k * step) % N
+        dx = P[(i + 4) % N][0] - P[(i - 4) % N][0]
+        dy = P[(i + 4) % N][1] - P[(i - 4) % N][1]
+        if dx > 0.6:
+            cur = 1
+        elif dx < -0.6:
+            cur = -1
+        facing.append(cur)
+        pitch.append(max(-28, min(28, math.degrees(math.atan2(dy, abs(dx) + 1e-6)))))
+    facing[-1] = facing[0]
+    ts = [k / M for k in range(M + 1)]
+
+    def vis(side):                            # discrete visibility, listing only the change points
+        kt, vals, last = [], [], None
+        for t_, f_ in zip(ts, facing):
+            v = 1 if f_ == side else 0
+            if v != last:
+                kt.append(t_); vals.append(v); last = v
+        kt[0] = 0.0
+        return ";".join(f"{x:.4f}" for x in kt), ";".join(map(str, vals))
+
+    def group(side, sign, use_tf):
+        kt, vals = vis(side)
+        rot = ";".join(f"{sign * p:.1f}" for p in pitch)
+        rot_kt = ";".join(f"{x:.4f}" for x in ts)
+        return (f'<g opacity="0"><animate attributeName="opacity" dur="{dur}s" repeatCount="indefinite" calcMode="discrete" keyTimes="{kt}" values="{vals}"/>'
+                f'<g><animateTransform attributeName="transform" type="rotate" dur="{dur}s" repeatCount="indefinite" keyTimes="{rot_kt}" values="{rot}"/>'
+                f'<ellipse cx="0" cy="1" rx="{width * .42:.1f}" ry="2.2" fill="#4f3f7e" opacity=".3"/>'
+                f'<use href="#gpcar"{use_tf}/></g></g>')
+    return (f'<defs><image id="gpcar" href="{uri}" x="{-width / 2:.1f}" y="{-h + 2:.1f}" width="{width}" height="{h:.1f}"/></defs>'
+            f'<g><animateMotion dur="{dur}s" repeatCount="indefinite" rotate="0" path="{d_path}"/>'
+            + group(-1, -1, "") + group(1, 1, ' transform="scale(-1 1)"') + '</g>')
+
+
 # ---------------------------------------------------------------- render
-LEVEL = ["#e6e0f3", "#d9c9f7", "#bda0f0", "#f4a3c4", "#e5709f"]
+LEVEL = ["#ddd3f1", "#cdb4f7", "#a98af0", "#f08fb8", "#e2548c"]
 INK, SOFT = "#4f3f7e", "#8a7bb0"
 MONTHS = "JFMAMJJASOND"
 
@@ -148,13 +202,13 @@ text{{font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace}}
     for i in range(5):
         cx = 500 + i * 20
         on = 0.01 + i * 0.012
-        a(f'<circle cx="{cx}" cy="36" r="7" fill="#f4a3c4" opacity=".25"/>'
+        a(f'<circle cx="{cx}" cy="36" r="7" fill="#d9c9ee" opacity=".75" stroke="#fff" stroke-width="1.5"/>'
           f'<circle cx="{cx}" cy="36" r="7" fill="#e5709f" opacity="0"><animate attributeName="opacity" dur="{dur}s" repeatCount="indefinite" '
           f'keyTimes="0;{on:.3f};0.09;1" values="0;1;0;0" calcMode="discrete"/>'
           f'</circle>')
     # track bed
     a(f'<path d="{d_path}" fill="none" stroke="#fff" stroke-width="20" stroke-linejoin="round" opacity=".95"/>')
-    a(f'<path d="{d_path}" fill="none" stroke="#d6c9ee" stroke-width="16" stroke-linejoin="round" opacity=".6"/>')
+    a(f'<path d="{d_path}" fill="none" stroke="#c4b5e3" stroke-width="16" stroke-linejoin="round" opacity=".8"/>')
     # day segments
     for i in range(N):
         (x1, y1), (x2, y2) = P[i], P[i + 1]
@@ -181,12 +235,16 @@ text{{font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace}}
     # DRS glow + car (with trail)
     a(f'<path class="drs" d="{d_path}" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="40 {track_len:.0f}" opacity=".6" filter="url(#glow)">'
       f'<animate attributeName="stroke-dashoffset" from="0" to="-{track_len + 40:.0f}" dur="{dur}s" repeatCount="indefinite"/></path>')
-    for lag, r, op in ((0.55, 3, .25), (0.35, 3.6, .45), (0.18, 4.2, .7)):
-        a(f'<circle r="{r}" fill="#f19cbc" opacity="{op}"><animateMotion dur="{dur}s" repeatCount="indefinite" begin="-{lag}s" path="{d_path}"/></circle>')
-    a(f'<g><animateMotion dur="{dur}s" repeatCount="indefinite" rotate="auto" path="{d_path}"/>'
-      '<rect x="-9" y="-3.2" width="18" height="6.4" rx="3" fill="#e5709f" stroke="#fff" stroke-width="1.2"/>'
-      '<rect x="-10.5" y="-5.5" width="3" height="11" rx="1" fill="#4f3f7e"/><rect x="6" y="-4.6" width="2.6" height="9.2" rx="1" fill="#4f3f7e"/>'
-      '<circle cx="-1" cy="0" r="2" fill="#fff"/></g>')
+    real = real_car(P, N, dur, d_path)
+    if real:
+        a(real)
+    else:                                   # fallback if the car image is not in the repo
+        for lag, r, op in ((0.55, 3, .25), (0.35, 3.6, .45), (0.18, 4.2, .7)):
+            a(f'<circle r="{r}" fill="#f19cbc" opacity="{op}"><animateMotion dur="{dur}s" repeatCount="indefinite" begin="-{lag}s" path="{d_path}"/></circle>')
+        a(f'<g><animateMotion dur="{dur}s" repeatCount="indefinite" rotate="auto" path="{d_path}"/>'
+          '<rect x="-9" y="-3.2" width="18" height="6.4" rx="3" fill="#e5709f" stroke="#fff" stroke-width="1.2"/>'
+          '<rect x="-10.5" y="-5.5" width="3" height="11" rx="1" fill="#4f3f7e"/><rect x="6" y="-4.6" width="2.6" height="9.2" rx="1" fill="#4f3f7e"/>'
+          '<circle cx="-1" cy="0" r="2" fill="#fff"/></g>')
 
     # legend under track
     lx = 36

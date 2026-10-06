@@ -80,7 +80,7 @@ def main():
     print("cropped", car.size)
 
     meta = {"source": "Gil Abrantes, 'McLaren MP4-26', CC BY 2.0", "sizes": {}}
-    for name, width in (("car", 1000), ("car-sm", 380)):
+    for name, width in (("car", 1000), ("car-sm", 380), ("car-xs", 220)):
         s = width / car.size[0]
         im = car.resize((width, round(car.size[1] * s)), Image.LANCZOS)
         save(im, os.path.join(a.out, name + ".webp"))
