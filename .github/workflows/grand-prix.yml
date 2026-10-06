@@ -1,0 +1,45 @@
+name: Update Contribution Grand Prix
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/grand_prix.py
+      - .github/workflows/grand-prix.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grand-prix
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Draw the circuit from real contributions
+        run: python scripts/grand_prix.py --user Deltasthicc --out assets/grand-prix.svg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit if the circuit changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/grand-prix.svg
+          if git diff --cached --quiet; then
+            echo "No change."
+          else
+            git commit -m "chore: refresh contribution grand prix"
+            git push
+          fi

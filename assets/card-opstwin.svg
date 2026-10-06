@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="190" viewBox="0 0 430 190" role="img" aria-label="OpsTwin Recovery Arena: OpenEnv arena for incident-response agents">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dff5ea"/><stop offset="1" stop-color="#fff0d9"/></linearGradient>
+<linearGradient id="ic" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e08a5f" stop-opacity=".95"/><stop offset="1" stop-color="#e08a5f" stop-opacity=".6"/></linearGradient>
+<linearGradient id="sh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<clipPath id="cl"><rect x="1" y="1" width="428" height="188" rx="22"/></clipPath>
+<filter id="bl"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<style>
+.fa{animation:fa 8s ease-in-out infinite}.fb{animation:fa 11s ease-in-out -4s infinite}
+@keyframes fa{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-10px)}}
+.sh{animation:sh 6.5s ease-in-out infinite}@keyframes sh{0%,55%{transform:translateX(-200px)}100%{transform:translateX(640px)}}
+.ic{animation:ic 3.4s ease-in-out infinite}@keyframes ic{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(-3deg)}}
+.ar{animation:ar 1.6s ease-in-out infinite}@keyframes ar{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.pl{animation:pl 3s ease-in-out infinite}@keyframes pl{0%,100%{opacity:.85}50%{opacity:1}}
+.in{animation:inn .9s cubic-bezier(.2,.8,.2,1) both}@keyframes inn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+<rect x=".5" y=".5" width="429" height="189" rx="22.5" fill="url(#bg)" stroke="#fff" stroke-opacity=".9"/>
+<g clip-path="url(#cl)">
+<g class="fa"><circle cx="360" cy="30" r="62" fill="#e08a5f" opacity=".22" filter="url(#bl)"/></g>
+<g class="fb"><circle cx="60" cy="176" r="56" fill="#fff" opacity=".5" filter="url(#bl)"/></g>
+<g class="ic" style="transform-box:fill-box;transform-origin:center"><rect x="24" y="22" width="48" height="48" rx="15" fill="url(#ic)" stroke="#fff" stroke-width="2"/><text x="48" y="53" text-anchor="middle" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="19" font-weight="800" fill="#fff">OT</text></g>
+<g class="in"><text x="86" y="43" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" font-weight="800" fill="#4f3f7e">OpsTwin Recovery Arena</text><text x="86" y="62" font-family="'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace" font-size="11" fill="#8a7bb0">opstwin-recovery</text></g>
+<g class="in" style="animation-delay:.15s"><text x="24" y="104" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13.5" fill="#4f3f7e" opacity=".9">OpenEnv arena for incident-response agents</text></g>
+<g class="pl" style="animation-delay:-0.0s"><rect x="24.0" y="120" width="66.2" height="24" rx="12" fill="#fff" opacity=".75" stroke="#e08a5f" stroke-opacity=".35"/><text x="57.1" y="136" text-anchor="middle" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="11.5" font-weight="600" fill="#4f3f7e">OpenEnv</text></g>
+<g class="pl" style="animation-delay:-0.7s"><rect x="98.2" y="120" width="33.2" height="24" rx="12" fill="#fff" opacity=".75" stroke="#e08a5f" stroke-opacity=".35"/><text x="114.8" y="136" text-anchor="middle" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="11.5" font-weight="600" fill="#4f3f7e">RL</text></g>
+<g class="pl" style="animation-delay:-1.4s"><rect x="139.4" y="120" width="92.6" height="24" rx="12" fill="#fff" opacity=".75" stroke="#e08a5f" stroke-opacity=".35"/><text x="185.7" y="136" text-anchor="middle" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="11.5" font-weight="600" fill="#4f3f7e">Multi-agent</text></g>
+<circle cx="31" cy="166" r="5" fill="#9b86e8"/><text x="42" y="170" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="12" fill="#8a7bb0">Python</text>
+<g class="ar"><text x="406" y="170" text-anchor="end" font-family="'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="700" fill="#e08a5f">view repo  →</text></g>
+<g transform="skewX(-18)"><rect class="sh" x="0" y="0" width="90" height="190" fill="url(#sh)"/></g>
+</g></svg>
