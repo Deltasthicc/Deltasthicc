@@ -11,6 +11,10 @@
 <a href="https://github.com/Deltasthicc?tab=followers"><img src="https://img.shields.io/github/followers/Deltasthicc?style=for-the-badge&color=f7b9d0&labelColor=fde1ec&logo=githubsponsors&logoColor=8a3f5f" alt="Followers"/></a>
 <img src="https://komarev.com/ghpvc/?username=Deltasthicc&style=for-the-badge&color=a9dcc4&labelColor=d9f2e6&label=PROFILE+VIEWS" alt="Profile views"/>
 
+<br/><br/>
+
+<a href="https://deltasthicc.github.io"><img src="https://img.shields.io/badge/%F0%9F%8F%8E%EF%B8%8F_OPEN_THE_INTERACTIVE_SITE-drive_the_car,_hover_the_circuit-f19cbc?style=for-the-badge&labelColor=fde1ec" alt="Open the interactive site"/></a>
+
 </div>
 
 <img src="assets/divider.svg" width="100%" alt=""/>
@@ -89,6 +93,18 @@ Lateral-entry B.Tech CSE student at Shiv Nadar University (batch of 2027), focus
 
 </div>
 
+<details>
+<summary><b>🔧 How the Grand Prix works</b> (click to open)</summary>
+<br/>
+
+* Each of the last 364 days is one tiny segment of the circuit, coloured by how many contributions I made that day
+* The three sector labels add up each third of the year, and the best one is highlighted in purple
+* Months become a tyre strategy: busy months are soft tyres, quiet months are hard
+* A GitHub Action calls the GitHub API, redraws the SVG and commits it every 12 hours. No third-party service is involved
+* Open the [interactive site](https://deltasthicc.github.io) to hover over any day
+
+</details>
+
 <img src="assets/divider.svg" width="100%" alt=""/>
 
 ## 📊 Stats
@@ -103,6 +119,9 @@ Lateral-entry B.Tech CSE student at Shiv Nadar University (batch of 2027), focus
 
 <br/>
 
+<img src="assets/footer.svg" width="100%" alt="A McLaren F1 car crossing the chequered flag line: thanks for stopping by"/>
+
 <div align="center">
-<sub>Pastel, animated and kept fresh by GitHub Actions 🌸</sub>
+<sub>Pastel, animated and kept fresh by GitHub Actions 🌸<br/>
+Car photo: <a href="https://commons.wikimedia.org/wiki/File:McLaren_MP4-26.jpg">"McLaren MP4-26"</a> by Gil Abrantes, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>. Cut out, resized and animated by me. Cars and liveries belong to their owners.</sub>
 </div>
